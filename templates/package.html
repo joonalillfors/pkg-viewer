@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Go Index</title>
+  </head>
+  <body>
+    <p>
+      Name: {{.Name}}
+    </p>
+    <p>
+        Description: {{.Description}}
+    </p>
+    <p>
+        Depends: {{range .Depends}}
+            {{.}}, 
+        {{end}}
+    </p>
+    <p>
+        Dependants: {{range .Dependants}}
+            {{.}}, 
+        {{end}}
+    </p>
+  </body>
+</html>

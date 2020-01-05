@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Go Index</title>
+  </head>
+  <body>
+    <p>
+      Index
+    </p>
+    <ul>
+        {{range .}}
+            <li>
+                <a href="/tmpl/packages/{{.}}">{{.}}</a>
+            </li>
+        {{end}}
+    </ul>
+  </body>
+</html>
