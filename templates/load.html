@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Go Index</title>
+    <link rel="stylesheet" type="text/css" href="/css/load.css">
+  </head>
+  <body>
+    {{if .}}
+        <p>Status file was successfully loaded.</p>
+        <a href="/index">Index</a>
+    {{ else }}
+        <p>Loading failed</p>
+        <a href="/">Try again</a>
+    {{ end }}
+  </body>
+</html>

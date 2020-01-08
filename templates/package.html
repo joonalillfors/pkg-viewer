@@ -2,23 +2,42 @@
 <html>
   <head>
     <title>Go Index</title>
+    <link rel="stylesheet" type="text/css" href="/css/package.css">
   </head>
   <body>
     <p>
-      Name: {{.Name}}
+      <b>Package:</b> {{.Name}}
     </p>
+    <p class="description"><b>Description:</b> {{.Description}}</p>
     <p>
-        Description: {{.Description}}
+        <b>Depends:</b>
+        {{ $size := len .Depends }}
+        {{ if ne 0 $size }}
+          {{ $first := index .Depends 0 }}
+          {{range .Depends -}}
+          {{ if ne .Package $first.Package }},{{ end }}
+            {{- if eq .Link 1 }}
+              <a href="/packages/{{.Package}}">{{.Package}}</a>
+            {{- else }}
+              {{.Package}}
+            {{ end }}
+          {{- end}}
+        {{ else }}
+          No dependencies
+        {{ end }}
     </p>
-    <p>
-        Depends: {{range .Depends}}
-            {{.}}, 
-        {{end}}
-    </p>
-    <p>
-        Dependants: {{range .Dependants}}
-            {{.}}, 
-        {{end}}
+    <p class="dep">
+      <b>Dependants:</b>
+      {{ $size := len .Dependants }}
+      {{ if ne 0 $size }}
+        {{ $first := index .Dependants 0 }}
+        {{range .Dependants -}}
+          {{ if ne . $first  }}, {{ end }}
+          <a href="/packages/{{.}}">{{.}}</a>
+        {{- end}}
+      {{ else }}
+        No dependants
+      {{ end }}
     </p>
   </body>
 </html>

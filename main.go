@@ -11,25 +11,27 @@ import (
 
 func main() {
 	db, _ := sql.Open("sqlite3", "./pkg.db")
-	statement, _ := 
-		db.Prepare("CREATE TABLE IF NOT EXISTS packages (name TEXT PRIMARY KEY, description TEXT, depends TEXT, dependants TEXT)")
+	statement, _ := db.Prepare("CREATE TABLE IF NOT EXISTS packages (name TEXT PRIMARY KEY, description TEXT)")
 	statement.Exec()
 	
-	statement, _ = db.Prepare("CREATE TABLE IF NOT EXISTS dependencies (package TEXT, dependency TEXT)")
+	statement, _ = db.Prepare("CREATE TABLE IF NOT EXISTS dependencies (package TEXT, dependency TEXT, link INTEGER)")
 	statement.Exec()
 
 	controllers.Database = db
 
 	r := mux.NewRouter()
-	r.HandleFunc("/api", controllers.Root)
-	r.HandleFunc("/api/index", controllers.Index)
-	r.HandleFunc("/api/packages/{package}", controllers.Package)
+	r.PathPrefix("/css").Handler(http.StripPrefix("/css", http.FileServer(http.Dir("css/"))))
+	r.HandleFunc("/", controllers.Root)
 
-	r.HandleFunc("/tmpl/index", controllers.IndexTemplate)
-	r.HandleFunc("/tmpl/packages/{package}", controllers.PackageTemplate)
+	r.HandleFunc("/index", controllers.Index)
+	r.HandleFunc("/packages/{package}", controllers.Package)
 
-	r.PathPrefix("/index").Handler(http.StripPrefix("/index", http.FileServer(http.Dir("client/build/"))))
-	r.PathPrefix("/packages/{package}").Handler(http.StripPrefix("/packages/{package}", http.FileServer(http.Dir("client/build/"))))
+	// extra?
+	// r.HandleFunc("/api/index", controllers.Index)
+	// r.HandleFunc("/api/packages/{package}", controllers.Package)
+
+	// r.PathPrefix("/index").Handler(http.StripPrefix("/index", http.FileServer(http.Dir("client/build/"))))
+	// r.PathPrefix("/packages/{package}").Handler(http.StripPrefix("/packages/{package}", http.FileServer(http.Dir("client/build/"))))
 
 	fmt.Println("Listening on: 3000")
 

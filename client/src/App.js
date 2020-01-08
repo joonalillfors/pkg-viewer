@@ -14,19 +14,22 @@ function App() {
   
 
   return (
-    <Router>
-      <Switch>
-        <Route path="/index">
-          <Index />
-        </Route>
-        <Route path="/packages/:package">
-          <Package />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-    </Router>
+    <div>
+      <h1>THIS IS REACT APP BITCHES</h1>
+      {/* <Router>
+        <Switch>
+          <Route path="/index">
+            <Index />
+          </Route>
+          <Route path="/packages/:package">
+            <Package />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router> */}
+    </div>
   )
 }
 
