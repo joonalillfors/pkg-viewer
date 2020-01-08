@@ -2,6 +2,8 @@
 
 # How to run
 
+Dependencies can be installed with ```go get ./...``` from the root of the repository.
+
 Run ```go run .``` from root of the repository.
 
 # Endpoints
